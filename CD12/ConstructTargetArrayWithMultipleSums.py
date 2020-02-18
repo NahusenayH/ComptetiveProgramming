@@ -1,13 +1,21 @@
 class Solution:
     def isPossible(self, target: List[int]) -> bool:
-        maxi = max(target)
-        ans = maxi - (sum(target)-maxi)
-        while ans >= 1:
-            maxi = max(target)
-            ans = maxi - (sum(target)-maxi)
-            if ans < 1:
-                break
-            target[target.index(maxi)] = ans
-        finalSum = sum(target)
-        print(target)
-        return finalSum == len(target)
+        if len(target) <= 1 and target[0] != 1:
+            return False
+        if len(target) == 1 and target[0] == 1:
+            return True
+        heap = []
+        for i in target:
+            heap.append(-i)
+        heapq.heapify(heap)
+        total = sum(target)
+        while True:
+            a = -heapq.heappop(heap)
+            total -= a
+            if a == 1 or total == 1: 
+                return True
+            if a < total or a % total == 0:
+                return False
+            a %= total
+            total += a
+            heapq.heappush(heap, -a)
