@@ -18,8 +18,4 @@ class Solution:
                 return False
             a %= total
             total += a
-<<<<<<< HEAD
             heapq.heappush(heap, -a)
-=======
-            heapq.heappush(heap, -a)
->>>>>>> 3d018c0b9ac10b4f830a9fdf97fd9396ffc7e89e
